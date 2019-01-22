@@ -77,12 +77,37 @@ And set
 #define BED_CENTER_AT_0_0
 
 
+# Using DXF2GCode to Generate GCode
+Edit the Configuration:
+	Machine config:
+	Set G1 feedrates as 1500 mm/min for X and Y (and Z)
+	Retraction coordinate as 0.00 mm
+	
+Edit the Postprocessor Configuration: see postro_config.cfg
+	Software config:
+	Output file extension: .gcode
+	Startup: 
+		M17 (Enable motors)
+		G28 X Y (Home X and Y axes before start)
+		M107 P1 S0 (Turn off laser)
+		G0 F5000 (Set rapid move feedrate)
+	End:
+		M107 P1 S0 (Turn off laser)
+     		M84 (Disable motors)
+		M2 (Program end)
 
+	Edit the Gcode codes to insert laser trigger before and after each shape, take out Z moves, edit feedrate, etc.
+	
 
+# Set up Pronterface
+Use 250000 baud rate to communicate with arduino.
+
+Set up bed dimensions to match Marlin.
+
+Set matching feedrates in case pronterface alters Marlin settings.
 
 Useful GCode commands:
 G28 X Y for homing X and Y
-	
-	All endstops NOT inverted (for NC limit switches)
-		
-	G92 X0 Y0 Z0 sets current position as 0,0,0
+M84 (disable motors)
+M17 (Enable motors)
+M280 P0 Sxxx (for servo position adjustment, using 0-255 (0-100%) duty cycle)
