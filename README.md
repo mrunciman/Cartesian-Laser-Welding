@@ -78,6 +78,8 @@ And set
 
 
 # Using DXF2GCode to Generate GCode
+Download here: https://sourceforge.net/projects/dxf2gcode/
+
 Edit the Configuration:
 	Machine config:
 	Set G1 feedrates as 1500 mm/min for X and Y (and Z)
@@ -100,6 +102,7 @@ Edit the Postprocessor Configuration: see postro_config.cfg
 	
 
 # Set up Pronterface
+Download here:
 Use 250000 baud rate to communicate with arduino.
 
 Set up bed dimensions to match Marlin.
