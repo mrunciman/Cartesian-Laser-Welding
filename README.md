@@ -3,16 +3,17 @@ Marlin Firmware for XY Laser Welder
 
 These Configuration.h, Configuration.adv and pins_RAMPS.h files determine the setup of the XY robot.
 
-For dual Y carriages:
-	Have to say there is one extruder 
+For dual Y steppers:
+Have to say there is one extruder 
   #define EXTRUDERS 1 in Configuration.h
-	Set dual Y steppers in Configuration_adv.h
+Set dual Y steppers in Configuration_adv.h
   #define Y_DUAL_STEPPER_DRIVERS
   
-	Then make these changes in Pins_RAMPS.h
-		○ E0 should be directed to unused pins
-		○ Then, Marlin chooses next available extruder as 2nd Y axis pins, which you direct to what was previously E0 in order to use the motor driver connnector.
-   In configuration_adv.h:
+Then make these changes in Pins_RAMPS.h
+	○ E0 should be directed to unused pins
+	○ Then, Marlin chooses next available extruder as 2nd Y axis pins, which you direct to what was previously E0 in order to use the motor driver connnector.
+   In Pins_RAMPS.h:
+   
 		#define E0_STEP_PIN        23
 		#define E0_DIR_PIN         25
 		#define E0_ENABLE_PIN      27
@@ -28,10 +29,11 @@ For dual Y carriages:
 		#endif
 
 D6 on servo header used for 100% duty cycle PWM laser trigger.
-  M107 P1 S0 switches off / M106 P1 S255 switches on. 
+  M107 P1 S0 switches off / M106 P1 S255 switches on.
+  
 	#define FAN1_PIN 6 // 2nd fan output attached to laser TTL input in configuration.h
-	http://marlinfw.org/docs/configuration/laser_spindle.html 
 
+http://marlinfw.org/docs/configuration/laser_spindle.html 
 
 Temp sensors TEMP_SENSOR_0 and TEMP_SENSOR_BED defined as 998 in configuration.h for dummy (no) sensor.
 
@@ -72,9 +74,10 @@ To place the origin at the centre of the bed and allow for motion to negative co
 #define Y_MAX_POS (Y_BED_SIZE/2)+1
 #define Z_MAX_POS 1
 
-And set 
-// The center of the bed is at (X=0, Y=0)
-#define BED_CENTER_AT_0_0
+And set:
+
+	// The center of the bed is at (X=0, Y=0)
+	#define BED_CENTER_AT_0_0
 
 
 # Using DXF2GCode to Generate GCode
@@ -89,18 +92,19 @@ Edit the Postprocessor Configuration: see postro_config.cfg
 	Software config:
 	Output file extension: .gcode
 	Startup: 
+	
 		M17 (Enable motors)
 		G28 X Y (Home X and Y axes before start)
 		M107 P1 S0 (Turn off laser)
 		G0 F5000 (Set rapid move feedrate)
-	End:
+End:
+	
 		M107 P1 S0 (Turn off laser)
      		M84 (Disable motors)
 		M2 (Program end)
 
-	Edit the Gcode codes to insert laser trigger before and after each shape, take out Z moves, edit feedrate, etc.
+Edit the Gcode files to insert laser trigger before and after each shape, take out Z moves, edit feedrate, etc.
 	
-
 # Set up Pronterface
 Download here:
 Use 250000 baud rate to communicate with arduino.
@@ -110,7 +114,8 @@ Set up bed dimensions to match Marlin.
 Set matching feedrates in case pronterface alters Marlin settings.
 
 Useful GCode commands:
-G28 X Y for homing X and Y
-M84 (disable motors)
-M17 (Enable motors)
-M280 P0 Sxxx (for servo position adjustment, using 0-255 (0-100%) duty cycle)
+
+	G28 X Y for homing X and Y
+	M84 (disable motors)
+	M17 (Enable motors)
+	M280 P0 Sxxx (for servo position adjustment, using 0-255 (0-100%) duty cycle)
