@@ -118,4 +118,4 @@ Useful GCode commands:
 	G28 X Y for homing X and Y
 	M84 (disable motors)
 	M17 (Enable motors)
-	M280 P0 Sxxx (for servo position adjustment, using 0-255 (0-100%) duty cycle)
+	M280 P0 Sxxx (for servo position adjustment, using 0-150 deg
